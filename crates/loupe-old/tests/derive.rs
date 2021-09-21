@@ -1,4 +1,4 @@
-use loupe::{size_of_val, MemoryUsage, POINTER_BYTE_SIZE};
+use loupe_old::{size_of_val, MemoryUsage, POINTER_BYTE_SIZE};
 
 macro_rules! assert_size_of_val_eq {
     ($expected:expr, $value:expr) => {

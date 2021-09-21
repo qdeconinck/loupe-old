@@ -49,7 +49,7 @@
 //!         x: vec![1, 2, 3],
 //!         y: vec![1, 2, 3],
 //!     };
-//!     
+//!
 //!     assert_eq!(48, mem::size_of_val(&s));
 //!     assert_eq!(72, loupe::size_of_val(&s));
 //! }
@@ -89,7 +89,7 @@
 mod memory_usage;
 
 #[cfg(feature = "derive")]
-pub use loupe_derive::*;
+pub use loupe_old_derive::*;
 pub use memory_usage::*;
 
 use std::collections::BTreeSet;
@@ -114,7 +114,7 @@ use std::collections::BTreeSet;
 ///         x: vec![1, 2, 3],
 ///         y: vec![1, 2, 3],
 ///     };
-///     
+///
 ///     assert_eq!(48, mem::size_of_val(&s));
 ///     assert_eq!(72, loupe::size_of_val(&s));
 /// }

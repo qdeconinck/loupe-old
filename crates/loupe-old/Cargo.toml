@@ -1,5 +1,5 @@
 [package]
-name = "loupe"
+name = "loupe-old"
 version = "0.1.3"
 description = "Profiling tool for Rust"
 repository = "https://github.com/wasmerio/loupe"
@@ -7,11 +7,11 @@ license = "MIT"
 edition = "2018"
 
 [dependencies]
-loupe-derive = { path = "../loupe-derive", version = "0.1.3", optional = true }
+loupe-old-derive = { path = "../loupe-old-derive", version = "0.1.3", optional = true }
 indexmap = { version = "1.6", optional = true }
 rustversion = "1.0"
 
 [features]
 default = ["derive"]
-derive = ["loupe-derive"]
+derive = ["loupe-old-derive"]
 enable-indexmap = ["indexmap"]

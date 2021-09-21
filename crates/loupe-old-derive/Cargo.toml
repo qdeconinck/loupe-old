@@ -1,5 +1,5 @@
 [package]
-name = "loupe-derive"
+name = "loupe-old-derive"
 version = "0.1.3"
 description = "Profiling tool for Rust, see the `loupe` crate"
 repository = "https://github.com/wasmerio/loupe"

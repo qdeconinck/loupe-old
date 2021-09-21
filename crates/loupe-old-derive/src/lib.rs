@@ -6,7 +6,7 @@ use syn::{
     parse, Attribute, Data, DataEnum, DataStruct, DeriveInput, Fields, Generics, Ident, Index,
 };
 
-/// Procedural macro to implement the `loupe::MemoryUsage` trait
+/// Procedural macro to implement the `loupe_old::MemoryUsage` trait
 /// automatically for structs and enums.
 ///
 /// All struct fields and enum variants must implement `MemoryUsage`
@@ -97,7 +97,7 @@ fn derive_memory_usage_for_struct(
                     let span = ident.span();
 
                     Some(quote_spanned!(
-                        span => loupe::MemoryUsage::size_of_val(&self.#ident, visited) - std::mem::size_of_val(&self.#ident)
+                        span => loupe_old::MemoryUsage::size_of_val(&self.#ident, visited) - std::mem::size_of_val(&self.#ident)
                     ))
                 })
                 .collect(),
@@ -121,7 +121,7 @@ fn derive_memory_usage_for_struct(
 
                     let ident = Index::from(nth);
 
-                    Some(quote! { loupe::MemoryUsage::size_of_val(&self.#ident, visited) - std::mem::size_of_val(&self.#ident) })
+                    Some(quote! { loupe_old::MemoryUsage::size_of_val(&self.#ident, visited) - std::mem::size_of_val(&self.#ident) })
                 })
                 .collect(),
         }
@@ -133,10 +133,10 @@ fn derive_memory_usage_for_struct(
     // Implement the `MemoryUsage` trait for `struct_name`.
     (quote! {
         #[allow(dead_code)]
-        impl #impl_generics loupe::MemoryUsage for #struct_name #ty_generics
+        impl #impl_generics loupe_old::MemoryUsage for #struct_name #ty_generics
         #where_clause
         {
-            fn size_of_val(&self, visited: &mut loupe::MemoryUsageTracker) -> usize {
+            fn size_of_val(&self, visited: &mut loupe_old::MemoryUsageTracker) -> usize {
                 std::mem::size_of_val(self) + #sum
             }
         }
@@ -202,7 +202,7 @@ fn derive_memory_usage_for_enum(
                         let sum = {
                             let sum = join_fold(
                                 identifiers.map(|ident| quote! {
-                                    loupe::MemoryUsage::size_of_val(#ident, visited) - std::mem::size_of_val(#ident)
+                                    loupe_old::MemoryUsage::size_of_val(#ident, visited) - std::mem::size_of_val(#ident)
                                 }),
                                 |x, y| quote! { #x + #y },
                                 quote! { 0 },
@@ -264,7 +264,7 @@ fn derive_memory_usage_for_enum(
                         let sum = {
                             let sum = join_fold(
                                 identifiers.map(|ident| quote! {
-                                    loupe::MemoryUsage::size_of_val(#ident, visited) - std::mem::size_of_val(#ident)
+                                    loupe_old::MemoryUsage::size_of_val(#ident, visited) - std::mem::size_of_val(#ident)
                                 }),
                                 |x, y| quote! { #x + #y },
                                 quote! { 0 },
@@ -294,10 +294,10 @@ fn derive_memory_usage_for_enum(
     // Implement the `MemoryUsage` trait for `enum_name`.
     (quote! {
         #[allow(dead_code)]
-        impl #impl_generics loupe::MemoryUsage for #enum_name #ty_generics
+        impl #impl_generics loupe_old::MemoryUsage for #enum_name #ty_generics
         #where_clause
         {
-            fn size_of_val(&self, visited: &mut loupe::MemoryUsageTracker) -> usize {
+            fn size_of_val(&self, visited: &mut loupe_old::MemoryUsageTracker) -> usize {
                 std::mem::size_of_val(self) + match self {
                     #match_arms
                 }
